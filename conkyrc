@@ -1,0 +1,87 @@
+alignment top_right
+background yes
+border_width 40
+cpu_avg_samples 4
+default_color 9900ff 
+color0 660099
+color1 f2a400
+default_outline_color 660099
+default_shade_color 660099
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 30
+gap_y 45 
+maximum_width 210
+max_port_monitor_connections 64
+max_specials 512
+max_user_text 16384
+minimum_size 330 10
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+wm_class_name Conky
+own_window_colour black
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type override
+own_window yes
+stippled_borders 2
+update_interval 2
+uppercase no
+use_spacer yes
+use_xft yes
+xftalpha 0.8
+xftfont  Bitstream Vera Sans Mono:size=9
+
+TEXT
+${color1}$sysname $kernel ${alignr}$color
+${machine} @ $freq(MHz)
+
+# Processor graph
+${color0}Core1:$color ${cpu cpu1}%$alignr${exec sensors | grep 'Core 0' | cut -c16-22 | sed '/^$/d'}
+${color0}${cpugraph cpu1 32,210 f2a400 f2a400}
+${color0}Core2:$color ${cpu cpu2}%$alignr${exec sensors | grep 'Core 1' | cut -c16-22 | sed '/^$/d'}
+${color0}${cpugraph cpu2 32,210 f2a400 f2a400}
+${color0}Core3:$color ${cpu cpu3}%$alignr${exec sensors | grep 'Core 2' | cut -c16-22 | sed '/^$/d'}
+${color0}${cpugraph cpu3 32,210 f2a400 f2a400}
+${color0}Core4:$color ${cpu cpu4}%$alignr${exec sensors | grep 'Core 3' | cut -c16-22 | sed '/^$/d'}
+${color0}${cpugraph cpu4 32,210 f2a400 f2a400}
+
+# CPU usage processes
+${color0}Top:${alignr}CPU%
+$color${top name 1}$alignr${top cpu 1}
+$color${top name 2}$alignr${top cpu 2}
+$color${top name 3}$alignr${top cpu 3}
+$color${top name 4}$alignr${top cpu 4}
+$color${top name 5}$alignr${top cpu 5}
+
+# Net graph
+#${color0}Down: $color${downspeed enp0s25}$alignr${totaldown enp0s25}
+#${color1}${downspeedgraph enp0s25 32,210 f2a400 f2a400}
+#${color0}Up:   $color${upspeed enp0s25}$alignr${totalup enp0s25}
+#${color1}${upspeedgraph enp0s25 32,210 f2a400 f2a400}
+
+# Hard memory graph
+${color0}/$alignr$color${fs_used /}${color0}/$color${fs_size /}
+${color1}${fs_bar 5,210 /}
+${color0}/home$alignr$color${fs_used /home}${color0}/$color${fs_size /home}
+${color1}${fs_bar 5,210 /home}
+
+# Write/read graph
+#${color0}Read: $color${diskio_read}$alignr${color0}Write: $color${diskio_write}
+#${color0}${diskiograph /dev/sda 32,210 f2a400 f2a400}
+
+# RAM memory use
+${color0}DDR2: $color$memperc%$alignr$mem${color0}/${color}$memmax
+${color1}$membar
+
+# RAM usage processes
+${color0}Top:${alignr}MEM
+$color${top_mem name 1}$alignr${top_mem mem_res 1}
+$color${top_mem name 2}$alignr${top_mem mem_res 2}
+$color${top_mem name 3}$alignr${top_mem mem_res 3}
+$color${top_mem name 4}$alignr${top_mem mem_res 4}
+$color${top_mem name 5}$alignr${top_mem mem_res 5}
